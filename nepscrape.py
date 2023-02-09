@@ -17,8 +17,12 @@ def get_nepali_word(word):
     r = requests.get(URL)
     soup = BeautifulSoup(r.content, 'html.parser')
     
-    nepali_equivalent = soup.find('div', {'class': 'align_text2'}).string
-
+    try:
+        nepali_equivalent = soup.find('div', {'class': 'align_text2'}).string
+    except AttributeError:
+        print('Couldnot find that word.\n')
+        exit(-1)
+    
     return nepali_equivalent
 
 
